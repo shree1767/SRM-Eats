@@ -5,9 +5,11 @@ import { Transition } from "@headlessui/react";
 import logo from './assets/Group 1.svg'
 import cart from './assets/material-symbols_shopping-cart-outline.svg'
 import {Turn as Hamburger} from 'hamburger-react'
+import { useAuth0 } from "@auth0/auth0-react";
 
 export const  Navbar=(props)=> {
   const [isOpen, setOpen] = useState(false);
+  const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
   return (
       <nav className="bg-[#242424] sticky">
         <div className="max-w-8xl mx-auto py-5 px-5 sm:px-6 md:pl-10">
@@ -27,6 +29,12 @@ export const  Navbar=(props)=> {
               <div className="hidden md:block absolute right-0 mr-10">
                 <div className="ml-10 flex items-baseline space-x-4">
                     {!props.state && <Link to="/Auth" className=" text-white px-3 py-2 text-sm font-medium">Login</Link>}
+                    {isAuthenticated && <p>
+                      {user.name}
+                    </p> }
+                    {isAuthenticated ? (
+                    <button color="#fff" onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>Log Out</button>):(
+                    <button color="#fff" onClick={() => loginWithRedirect()}>Log In</button>)}
                     {props.state && 
                     <Link to="/Cart" className="text-white">
                       <div className="flex space-x-2">
