@@ -1,0 +1,4 @@
+textarea::placeholder {
+    color: #727070;
+    font-size: 13px;
+  }
