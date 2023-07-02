@@ -15,8 +15,7 @@ const mongoDB = async()=>{
                 foodShop.find({}).toArray(function(err,shopData){
                     if(err)console.log(err)
                     else{
-                        global.foodShop = shopData;
-                        console.log(shopData)
+                        global.foodShop = shopData;1
                     }
                 })
 
