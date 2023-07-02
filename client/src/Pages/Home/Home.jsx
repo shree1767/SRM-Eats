@@ -51,7 +51,7 @@ const Home = () => {
           return (
             <>
             <div key={shopData._id}>
-              <ShopCard shopName={shopData.shopName}/>
+              <ShopCard shopName={shopData.shopName} imgsrc={shopData.imgUrl}/>
             </div>
             </>
           );

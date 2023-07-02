@@ -79,7 +79,7 @@ const ShopMenu = (props) => {
     foodCat
     .map((data) => {
       return (
-        <div key={data._id}>
+        <div key={data._id} className="md:flex">
           <div className="text-md font-medium py-3">{data.Categoryname}</div>
          
           {foodItem.length !== 0 ? (
@@ -87,7 +87,7 @@ const ShopMenu = (props) => {
               .filter((item) => item.Categoryname === data.Categoryname)
               .map((filterItems) => {
                 return (
-                  <div key={filterItems._id} className="md:grid md:grid-cols-3 lg:grid-cols-4">
+                  <div key={filterItems._id} className="">
                     <Card foodName={filterItems.name} foodPrice={filterItems.price} imgsrc={filterItems.img}/>
                   </div>
                 );

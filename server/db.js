@@ -16,6 +16,7 @@ const mongoDB = async()=>{
                     if(err)console.log(err)
                     else{
                         global.foodShop = shopData;
+                        console.log(shopData)
                     }
                 })
 
