@@ -1,9 +1,10 @@
-import React,{useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import './Home.module.css';
 import ShopCard from '../../Components/Card/ShopCard';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
-  const [foodShop,setFoodShop] = useState([]);
+  const [foodShop, setFoodShop] = useState([]);
 
   const loadData = async () => {
     let response = await fetch("http://localhost:4000/api/foodData", {
@@ -16,6 +17,7 @@ const Home = () => {
 
     setFoodShop(response[2]);
   };
+
   useEffect(() => {
     loadData();
   }, []);
@@ -41,28 +43,25 @@ const Home = () => {
           </div>
         </div>
       </nav>
-      <hr className='my-5'/>
-      
+      <hr className='my-5' />
+
       {/* shops*/}
       <div className='grid md:grid-cols-3 lg:grid-cols-4'>
-      {
-      foodShop.length !== 0 ? (
-        foodShop.map((shopData) => {
-          return (
-            <>
-            <div key={shopData._id}>
-              <ShopCard shopName={shopData.shopName} imgsrc={shopData.imgUrl}/>
-            </div>
-            </>
-          );
-        })
-      ) : null
-      }
+        {foodShop.length !== 0 ? (
+          foodShop.map((shopData) => {
+            return (
+              <div key={shopData._id}>
+                <Link to={`/shopMenu/${shopData.shopName}`}>
+                  <ShopCard shopName={shopData.shopName} imgsrc={shopData.imgUrl} />
+                </Link>
+              </div>
+            );
+          })
+        ) : null}
       </div>
-      
-  </div>
-    
+    </div>
   );
 };
 
 export default Home;
+

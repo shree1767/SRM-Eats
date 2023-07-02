@@ -16,7 +16,7 @@ const AllRoutes = (props) => {
         <Route path='/Auth' element={<Auth/>}/>
         <Route path='/signup' element={<SignUp/>}/>
         <Route path='/Home' element={<Home/>}/>
-        <Route path='/ShopMenu' element={<ShopMenu/>}/>
+        <Route path='/shopMenu/:shopName' element={<ShopMenu/>}/>
         <Route path='/Cart' element={<Cart/>}/> 
     </Routes>
     </>
