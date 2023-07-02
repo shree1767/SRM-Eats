@@ -13,7 +13,7 @@ const AllRoutes = (props) => {
     <>
     <Routes>
         <Route path='/' element={<Landing state={props.state} selectedValue={props.selectedValue} handleChange={props.handleChange}/>}/>
-        <Route path='/Auth' element={<Auth state={props.state}/>}/>
+        <Route path='/Auth' element={<Auth/>}/>
         <Route path='/signup' element={<SignUp/>}/>
         <Route path='/Home' element={<Home/>}/>
         <Route path='/ShopMenu' element={<ShopMenu/>}/>

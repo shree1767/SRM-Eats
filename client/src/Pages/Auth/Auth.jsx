@@ -14,13 +14,15 @@ const Auth = () => {
         body: JSON.stringify({email:credentials.email,password:credentials.password})
       });
       const json = await response.json();
-      console.log(json)
+      console.log(json);
 
       if(!json.success){
           alert("Enter valid credentials")
       }
       if(json.success){
-          navigate("/home")
+          localStorage.setItem("authToken",json.authToken);
+          console.log(localStorage.getItem("authToken"))
+          navigate("/home");
       }
       
   }

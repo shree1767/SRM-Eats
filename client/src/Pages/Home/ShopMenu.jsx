@@ -1,18 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Home.module.css";
 import Card from "../../Components/Card/Card";
 
-const ShopMenu = () => {
+const ShopMenu = (props) => {
+
   const [isChecked, setIsChecked] = useState(false);
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
   };
+  const [foodItem, setFoodItem] = useState([]);
+  const [foodCat, setFoodCat] = useState([]);
+
+  const loadData = async () => {
+    let response = await fetch("http://localhost:4000/api/foodData", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    response = await response.json();
+
+    setFoodItem(response[0]);
+    setFoodCat(response[1]);
+    props.setFoodShop(response[2])
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
 
   return (
     <div className="bg-white py-10 px-4 md:px-20">
       <nav className="flex space-x-4 md:space-x-8 items-center justify-between">
-        <h3 className="text-xl md:text-2xl font-medium">Butty Food Corner</h3>
+        <h3 className="text-xl md:text-2xl font-medium">Butty Corner</h3>
+        <div className="flex space-x-5 ">
         {/* vegfilter */}
         <div className="flex items-center space-x-2 text-base">
           <span>Veg Only</span>
@@ -49,9 +71,38 @@ const ShopMenu = () => {
             />
           </div>
         </div>
+        </div>
       </nav>
       <hr className="my-5" />
-      <Card />
+      <div>
+  {foodCat.length !== 0 ? (
+    foodCat
+    .map((data) => {
+      return (
+        <div key={data._id}>
+          <div className="text-md font-medium py-3">{data.Categoryname}</div>
+         
+          {foodItem.length !== 0 ? (
+            foodItem
+              .filter((item) => item.Categoryname === data.Categoryname)
+              .map((filterItems) => {
+                return (
+                  <div key={filterItems._id} className="md:grid md:grid-cols-3 lg:grid-cols-4">
+                    <Card foodName={filterItems.name} foodPrice={filterItems.price} imgsrc={filterItems.img}/>
+                  </div>
+                );
+              })
+          ) : (
+            <div>No such Item</div>
+          )}
+        </div>
+      );
+    })
+  ) : (
+    " "
+  )}
+</div>
+
     </div>
   );
 };
