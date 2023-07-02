@@ -13,6 +13,7 @@ const Card = (props) => {
 
   const increase = () => {
     setCounter((count) => count + 1);
+    
   };
 
   const totalPrice = props.foodPrice * counter;
@@ -25,11 +26,12 @@ const Card = (props) => {
             <h5 className="font-medium">{props.foodName}</h5>
             <p className="font-regular py-3">{props.foodPrice}</p>
           </div>
-          <div className="px-3">
+          <div className="p-2">
             <img
               src={props.imgsrc}
               className="lg:w-[10vw] w-[30vw]"
               alt="foodimg"
+              style={{height:"120px",objectFit:"fill"}}
             />
           </div>
         </div>

@@ -30,6 +30,14 @@ const SignUp = () => {
 
   return (
     <div className="bg-[#ffffff] flex min-h-[90vh] items-center justify-center">
+      <div className='auth-container min-w-[20%] w-[300px] items-center justify-center'>
+      <div className='text-[30px] font-medium'>
+            Sign Up
+          </div> 
+          <div className='text-[#FA144B] text-[13px] px-1'>
+            Create a new account
+          </div>
+      <div className="form-card rounded-lg my-3 py-3">
       <form onSubmit={handleSubmit} className="min-w-[20%] w-[300px] items-center justify-center">
         <div className="mb-4">
           <label
@@ -98,6 +106,8 @@ const SignUp = () => {
           <Link to='/Auth'>Already have an account?</Link>
         </button>
       </form>
+      </div>
+      </div>
     </div>
   );
 };
