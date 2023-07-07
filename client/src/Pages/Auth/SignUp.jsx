@@ -5,24 +5,27 @@ const SignUp = () => {
   const [credentials, setcredentials] = useState({name:"",email:"",password:""});
   let navigate = useNavigate();
   const handleSubmit = async(e) =>{
-      e.preventDefault();
-      const response = await fetch("http://localhost:4000/api/createuser",{
-        method: 'POST',
-        headers:{
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({name:credentials.name,email:credentials.email,password:credentials.password})
-      });
-      const json = await response.json();
-      console.log(json)
+    e.preventDefault();
+    const response = await fetch("http://localhost:4000/api/createuser",{
+      method: 'POST',
+      headers:{
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({name:credentials.name,email:credentials.email,password:credentials.password})
+    });
+    const json = await response.json();
+    console.log(json);
 
-      if(!json.success){
-          alert("Enter valid credentials")
-      }
-      if(json.success){
-          navigate("/Auth")
-      }
-  }
+    if(!json.success){
+        alert("Enter valid credentials")
+    }
+    if(json.success){
+        localStorage.setItem("authToken",json.authToken);
+        console.log(localStorage.getItem("authToken"))
+        navigate("/Auth");
+    }
+}
+  
 
   const onChange = (event) =>{
      setcredentials({...credentials,[event.target.name]:event.target.value})
@@ -99,12 +102,11 @@ const SignUp = () => {
         >
           Sign Up
         </button>
-        <button
-          className="auth-btn mt-5 text-[#FA144B] text-[12px] py-3 min-w-[90%]"
-          type="submit"
+        <div
+          className="auth-btn mt-5 text-[#FA144B] text-[12px] py-3 min-w-[90%] text-center"
         >
           <Link to='/Auth'>Already have an account?</Link>
-        </button>
+        </div>
       </form>
       </div>
       </div>

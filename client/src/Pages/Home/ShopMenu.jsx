@@ -95,9 +95,7 @@ const ShopMenu = (props) => {
                         return (
                           <div key={filterItems._id} className="">
                             <Card
-                              foodName={filterItems.name}
-                              foodPrice={filterItems.price}
-                              imgsrc={filterItems.img}
+                              foodItem ={filterItems}
                             />
                           </div>
                         );
