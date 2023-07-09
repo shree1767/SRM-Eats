@@ -32,7 +32,7 @@ const Auth = () => {
   }
 
   return (
-    <section className='auth-section bg-[#ffffff] flex min-h-[90vh] items-center justify-center'>
+    <section className='auth-section bg-[#ffffff] flex min-h-screen items-center justify-center'>
         <div className='auth-container min-w-[20%] w-[300px] items-center justify-center'>
           <div className='text-[30px] font-medium'>
             Login

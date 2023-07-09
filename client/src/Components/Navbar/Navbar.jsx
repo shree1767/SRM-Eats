@@ -1,38 +1,87 @@
 import React, { useState } from "react";
-import { Link,useNavigate } from "react-router-dom";
-import "./Navbar.module.css";
+import { Link, useNavigate } from "react-router-dom";
 import { Transition } from "@headlessui/react";
+import { Turn as Hamburger } from "hamburger-react";
 import logo from "./assets/Group 1.svg";
 import cart from "./assets/material-symbols_shopping-cart-outline.svg";
 import location from "./assets/locationico.svg";
-import { Turn as Hamburger } from "hamburger-react";
 
 export const Navbar = (props) => {
   const [isOpen, setOpen] = useState(false);
+  const [cartQuantity, setCartQuantity] = useState(2);
+
   const navigate = useNavigate();
-  const handleLogout =()=>{
+  const handleLogout = () => {
     localStorage.removeItem("authToken");
-    navigate("/Auth")
-  }
+    navigate("/Auth");
+  };
+
   return (
-    <nav className="bg-[#242424] sticky border-y border-t-0 border-[#FA144B]">
-      <div className="max-w-[98vw] mx-auto py-5 px-5 sm:px-6 md:pl-10">
-        <div className="flex items-center justify-between h-14">
+    <nav className="bg-[#242424] fixed top-0 left-0 z-50 w-full border-y border-t-0 border-[#FA144B]">
+      <div className="max-w-screen mx-auto py-5 px-5 sm:px-6 md:pl-10">
+        <div className="flex items-center justify-between space-x-10 h-14">
           <div className="flex items-center">
-            <Link to="/" className="">
-              <img className="md:w-[9vw] w-[20vw]" src={logo} alt="logo" />
-            </Link>
-            {/*condition for selected dropdown value */}
-            {props.selectedValue && (
-              <div className="mx-7 flex space-x-2 text-white text-sm items-center">
-                <img src={location} alt="location" className="w-5 h-5" />
-                <p>{props.selectedValue}</p>
-              </div>
+            {localStorage.getItem("authToken") ? (
+              <Link to="/Home" className="">
+                <img className="md:w-[9vw] w-[20vw]" src={logo} alt="logo" />
+              </Link>
+            ) : (
+              <Link to="/" className="">
+                <img className="md:w-[9vw] w-[20vw]" src={logo} alt="logo" />
+              </Link>
             )}
 
-            <div className="hidden md:block absolute right-0 mr-10">
-              <div className="ml-10 flex space-x-4 items-center">
-                {localStorage.getItem("authToken") ? (
+            {/*condition for selected dropdown value */}
+            {props.selectedValue ? (
+              <Link
+                to="/"
+                className="mx-7 flex space-x-2 text-white text-sm mx-7 items-center"
+              >
+                <img src={location} alt="location" className="w-5 h-5" />
+                <p>{props.selectedValue}</p>
+              </Link>
+            ) : (
+              <Link
+                to="/"
+                className="flex space-x-2 text-white text-sm mx-7 items-center"
+              >
+                <img src={location} alt="location" className="w-5 h-5" />
+                <p>Select Location</p>
+              </Link>
+            )}
+          </div>
+          <div className="md:hidden relative">
+            <Hamburger
+              toggled={isOpen}
+              toggle={setOpen}
+              size={25}
+              color="#fff"
+              duration={0.5}
+              rounded
+            />
+          </div>
+          <div className="hidden md:block absolute right-0 mr-10">
+            <div className="ml-10 flex space-x-4 items-center">
+              {localStorage.getItem("authToken") ? (
+                <>
+                  <Link to="/Cart" className="text-white text-sm font-medium">
+                    <div className="flex space-x-2 items-center ">
+                      <img src={cart} alt="cart" className="w-5 h-5 mx-auto" />
+                    </div>
+                    <span className="text-[11px]">Cart </span>
+                  </Link>
+
+                  <Link
+                    to="/myorders"
+                    className="text-white text-sm font-medium"
+                  >
+                    <span>Orders</span>
+                  </Link>
+                </>
+              ) : (
+                " "
+              )}
+              {localStorage.getItem("authToken") ? (
                 <button
                   className="text-white justify-between text-sm block px-3 py-2 font-medium"
                   onClick={handleLogout}
@@ -47,36 +96,7 @@ export const Navbar = (props) => {
                   Login
                 </Link>
               )}
-
-                {localStorage.getItem("authToken")? (
-                  <>
-                    <Link to="/Cart" className="text-white text-sm font-medium">
-                      <div className="flex space-x-2 items-center">
-                        <img src={cart} alt="cart" />
-                        <span>Cart</span>
-                      </div>
-                    </Link>
-                    <Link
-                      to="/myorders"
-                      className="text-white text-sm font-medium"
-                    >
-                      <span>My Orders</span>
-                    </Link>
-                  </>
-                ):" "
-                }
-              </div>
             </div>
-          </div>
-          <div className="md:hidden">
-            <Hamburger
-              toggled={isOpen}
-              toggle={setOpen}
-              size={25}
-              color="#fff"
-              duration={0.5}
-              rounded
-            />
           </div>
         </div>
       </div>
@@ -90,43 +110,49 @@ export const Navbar = (props) => {
         leaveTo="opacity-0"
       >
         {(ref) => (
-          <div className="md:hidden bg-[#242424]" id="mobile-menu">
-            <div
-              ref={ref}
-              className="px-2 pt-2 pb-3 space-y-1 text-center sm:px-3"
-            >
-              {localStorage.getItem("authToken") ? (
-                <button
-                  className="text-white text-sm block px-3 py-2 font-medium"
-                  onClick={handleLogout}
-                >
-                  Logout
-                </button>
-              ) : (
-                <Link
-                  to="/Auth"
-                  className="text-white text-sm block px-3 py-2 font-medium"
-                >
-                  Login
-                </Link>
-              )}
-
-              {localStorage.getItem("authToken") && (
-                <>
-                  <Link to="/Cart" className="text-white text-sm font-medium">
-                    <div className="flex space-x-2 items-center justify-center py-4">
+          <div
+            className={`fixed inset-x-0 inset-y-30 bg-[#242424] bg-opacity-95 flex items-center justify-center`}
+            style={{ zIndex: 60 }}
+          >
+            <div className="md:hidden " id="mobile-menu">
+              <div className="px-2 pt-2 pb-3 space-y-5 text-center sm:px-3">
+                {localStorage.getItem("authToken") && (
+                  <>
+                    <Link
+                      to="/Cart"
+                      className="text-white text-sm mb-5 font-medium flex items-center justify-center"
+                    >
                       <img src={cart} alt="cart" />
-                      <span>Cart</span>
-                    </div>
-                  </Link>
-                  <Link
-                    to="/myorders"
-                    className="text-white text-sm font-medium"
+                      {cartQuantity > 0 && (
+                        <span className="rounded-full py-1 px-2.5 bg-white text-[#FA144B] text-[10px]">
+                          {cartQuantity}
+                        </span>
+                      )}
+                    </Link>
+                    <Link
+                      to="/myorders"
+                      className="text-white text-sm font-medium"
+                    >
+                      <span>Orders</span>
+                    </Link>
+                  </>
+                )}
+                {localStorage.getItem("authToken") ? (
+                  <button
+                    className="text-white mx-auto text-sm block px-3 py-2 font-medium"
+                    onClick={handleLogout}
                   >
-                    <span>My Orders</span>
+                    Logout
+                  </button>
+                ) : (
+                  <Link
+                    to="/Auth"
+                    className="text-white text-sm block px-3 py-2 font-medium"
+                  >
+                    Login
                   </Link>
-                </>
-              )}
+                )}
+              </div>
             </div>
           </div>
         )}

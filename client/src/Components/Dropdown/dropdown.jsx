@@ -50,8 +50,6 @@ function Dropdown(props) {
     }
   ];
  
-  // set value for default selection
-
   return (
     <div className="dropdown2 relative inline-block text-left w-full h-[7vh]">
       <Select

@@ -15,9 +15,27 @@ const AllRoutes = (props) => {
         <Route path='/' element={<Landing state={props.state} selectedValue={props.selectedValue} handleChange={props.handleChange}/>}/>
         <Route path='/Auth' element={<Auth/>}/>
         <Route path='/signup' element={<SignUp/>}/>
-        <Route path='/Home' element={<Home/>}/>
-        <Route path='/shopMenu/:shopName' element={<ShopMenu/>}/>
-        <Route path='/Cart' element={<Cart/>}/> 
+        <Route path='/Home' 
+          element=
+          { localStorage.getItem('authToken')?
+          <Home/> : <Auth/>
+          }/>
+          
+        <Route path='/shopMenu/:shopName' 
+        element=
+        {
+          localStorage.getItem('authToken')?
+          <ShopMenu/>: <Auth/>
+        }
+        />
+
+        <Route path='/Cart' 
+        element=
+        {
+          localStorage.getItem('authToken')?
+          <Cart />:<Auth/>
+        }
+        /> 
     </Routes>
     </>
   )

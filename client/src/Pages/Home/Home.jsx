@@ -23,7 +23,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="bg-white py-10 px-4 md:px-20">
+    <div className="pt-[18vh] bg-white  px-4 md:px-20">
       <nav className="flex space-x-4 md:space-x-8 items-center justify-between">
         <h3 className="text-xl md:text-2xl font-medium">Restaurants Nearby</h3>
         {/* search */}

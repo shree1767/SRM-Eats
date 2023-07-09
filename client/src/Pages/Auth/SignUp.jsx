@@ -32,7 +32,7 @@ const SignUp = () => {
   }
 
   return (
-    <div className="bg-[#ffffff] flex min-h-[90vh] items-center justify-center">
+    <div className="bg-[#ffffff] flex min-h-screen items-center justify-center">
       <div className='auth-container min-w-[20%] w-[300px] items-center justify-center'>
       <div className='text-[30px] font-medium'>
             Sign Up
@@ -50,7 +50,7 @@ const SignUp = () => {
             Name
           </label>
           <input
-            className="border border-[#BABFC4] min-w-[90%] h-[50px] p-3 text-[13px]"
+            className="border text-black border-[#BABFC4] min-w-[90%] h-[50px] p-3 text-[13px]"
             id="name"
             type="text"
             placeholder="Enter your name"

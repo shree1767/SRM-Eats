@@ -29,7 +29,7 @@ const ShopMenu = (props) => {
   }, []);
 
   return (
-    <div className="bg-white py-10 px-4 md:px-20">
+    <div className=" bg-white pt-[18vh] px-4 md:px-20">
       <nav className="flex space-x-4 md:space-x-8 items-center justify-between">
         <h3 className="text-xl md:text-2xl font-medium">Butty Corner</h3>
         <div className="flex space-x-5 ">
@@ -93,7 +93,7 @@ const ShopMenu = (props) => {
                       )
                       .map((filterItems) => {
                         return (
-                          <div key={filterItems._id} className="">
+                          <div key={filterItems._id}>
                             <Card
                               foodItem ={filterItems}
                             />
