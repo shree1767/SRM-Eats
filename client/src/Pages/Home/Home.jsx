@@ -7,7 +7,7 @@ const Home = () => {
   const [foodShop, setFoodShop] = useState([]);
   const [search, setSearch] = useState("");
   const loadData = async () => {
-    let response = await fetch("srm-eats-c2xl.vercel.app/api/foodData", {
+    let response = await fetch("https://srm-eats-c2xl.vercel.app/api/foodData", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
