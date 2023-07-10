@@ -49,8 +49,9 @@ const Cart = (props) => {
         <div className="bg-white rounded shadow">
           <div className="w-1/2 lg:float-left">
             <div className="">
-              {data.map((food) => (
+              {data.map((food,index) => (
                 <div className="grid grid-cols-3 px-3 md:grid-cols-4 md:gap-x-0 gap-x-[40vw] py-10 font-medium">
+                  
                   <p className="flex items-center w-[30vw]">
                     <img src={food.img} className="md:block hidden w-[8vw] h-[8vw]" alt="food" />
                     <img src={food.img} className="md:hidden block w-[30vw] h-[30vw]" alt="food" />
@@ -64,7 +65,7 @@ const Cart = (props) => {
                     <button
                       type="button"
                       className="py-2 px-6 border border-[#FA144B] text-[#FA144B] text-sm rounded-md"
-                      onClick=""
+                      onClick={()=>{dispatch({type:"REMOVE",index:index})}}
                     >
                       Remove
                     </button>

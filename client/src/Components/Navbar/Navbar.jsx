@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Transition } from "@headlessui/react";
 import { Turn as Hamburger } from "hamburger-react";
+import { useCart, useDispatchCart } from '../../Components/ContextReducer';
 import logo from "./assets/Group 1.svg";
 import cart from "./assets/material-symbols_shopping-cart-outline.svg";
 import location from "./assets/locationico.svg";
@@ -9,7 +10,7 @@ import location from "./assets/locationico.svg";
 export const Navbar = (props) => {
   const [isOpen, setOpen] = useState(false);
   const [cartQuantity, setCartQuantity] = useState(2);
-
+let data = useCart()
   const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem("authToken");
@@ -67,9 +68,15 @@ export const Navbar = (props) => {
                   <Link to="/Cart" className="text-white text-sm font-medium">
                     <div className="flex space-x-2 items-center ">
                       <img src={cart} alt="cart" className="w-5 h-5 mx-auto" />
+                      {data.length > 0 && (
+                        <span className="rounded-full py-1 px-2.5 bg-white text-[#FA144B] text-[10px]">
+                          {data.length}
+                        </span>
+                      )}
                     </div>
                     <span className="text-[11px]">Cart </span>
                   </Link>
+                  
 
                   <Link
                     to="/myorders"
@@ -123,9 +130,9 @@ export const Navbar = (props) => {
                       className="text-white text-sm mb-5 font-medium flex items-center justify-center"
                     >
                       <img src={cart} alt="cart" />
-                      {cartQuantity > 0 && (
+                      {data.length > 0 && (
                         <span className="rounded-full py-1 px-2.5 bg-white text-[#FA144B] text-[10px]">
-                          {cartQuantity}
+                          {data.length}
                         </span>
                       )}
                     </Link>
