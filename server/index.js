@@ -10,7 +10,7 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 app.use( (req,res,next) =>{
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000","https://srm-eats.vercel.app");
+  res.setHeader("Access-Control-Allow-Origin","https://srm-eats.vercel.app");
   res.setHeader(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
