@@ -4,16 +4,16 @@ import './Auth.module.css'
 const Auth = () => {
   const [credentials, setcredentials] = useState({email:"",password:""});
   let navigate = useNavigate();
-  const handleSubmit = (e) =>{
+  const handleSubmit = async(e) =>{
       e.preventDefault();
-      const response = fetch("https://srm-eats-c2xl.vercel.app/api/loginuser",{
+      const response = await fetch("https://srm-eats-c2xl.vercel.app/api/loginuser",{
         method: 'POST',
         headers:{
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({email:credentials.email,password:credentials.password})
       });
-      const json =  response.json();
+      const json =  await response.json();
       console.log(json);
 
       if(!json.success){
