@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'; // If you are using React Router for na
 
 const Dashboard = () => {
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div className="bg-gray-100 py-10 min-h-screen">
       Restaurant Dashboard
     </div>
   );

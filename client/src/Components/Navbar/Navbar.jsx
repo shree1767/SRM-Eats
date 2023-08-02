@@ -22,7 +22,7 @@ let data = useCart()
       <div className="max-w-screen mx-auto py-5 px-5 sm:px-6 md:pl-10">
         <div className="flex items-center justify-between space-x-10 h-14">
           <div className="flex items-center">
-            {localStorage.getItem("authToken") ? (
+            {localStorage.getItem("authToken")? (
               <Link to="/Home" className="">
                 <img className="md:w-[9vw] w-[20vw]" src={logo} alt="logo" />
               </Link>
@@ -63,7 +63,7 @@ let data = useCart()
           </div>
           <div className="hidden md:block absolute right-0 mr-10">
             <div className="ml-10 flex space-x-4 items-center">
-              {localStorage.getItem("authToken") ? (
+              {localStorage.getItem("authToken")? (
                 <>
                   <Link to="/Cart" className="text-white text-sm font-medium">
                     <div className="flex space-x-2 items-center ">
@@ -88,7 +88,7 @@ let data = useCart()
               ) : (
                 " "
               )}
-              {localStorage.getItem("authToken") ? (
+              {localStorage.getItem("authToken") && localStorage.getItem("userRole")=="user"? (
                 <button
                   className="text-white justify-between text-sm block px-3 py-2 font-medium"
                   onClick={handleLogout}

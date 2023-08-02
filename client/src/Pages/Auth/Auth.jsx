@@ -25,6 +25,7 @@ const Auth = () => {
   
     if (json.success) {
       localStorage.setItem("authToken", json.authToken);
+      localStorage.setItem("userRole",json.role);
       console.log(localStorage.getItem("authToken"));
   
       // Check the user's role and navigate accordingly
