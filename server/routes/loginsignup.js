@@ -5,11 +5,13 @@ const user = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const jwtsecret = "MynameisShreenidhi1$#";
+
 router.post(
   "/createuser",
   [
     body("email").isEmail(),
     body("name").isLength({ min: 5 }),
+    body("role").isLength({min:1}),
     body("password", "Incorrect Password").isLength({ min: 5 }),
   ],
   async (req, res) => {
@@ -21,6 +23,7 @@ router.post(
     const secPassword = await bcrypt.hash(req.body.password,salt);
     try {
       await user.create({
+        role: req.body.role,
         name: req.body.name,
         password: secPassword,
         email: req.body.email,

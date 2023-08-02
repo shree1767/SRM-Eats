@@ -2,7 +2,7 @@ import React,{useState} from "react";
 import {Link,useNavigate} from 'react-router-dom'
 
 const SignUp = () => {
-  const [credentials, setcredentials] = useState({name:"",email:"",password:""});
+  const [credentials, setcredentials] = useState({role:"", name:"",email:"",password:""});
   let navigate = useNavigate();
   const handleSubmit = async(e) =>{
     e.preventDefault();
@@ -11,7 +11,7 @@ const SignUp = () => {
       headers:{
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({name:credentials.name,email:credentials.email,password:credentials.password})
+      body: JSON.stringify({role:credentials.role,name:credentials.name,email:credentials.email,password:credentials.password})
     });
     const json = await response.json();
     console.log(json);
@@ -42,6 +42,24 @@ const SignUp = () => {
           </div>
       <div className="form-card rounded-lg my-3 py-3">
       <form onSubmit={handleSubmit} className="min-w-[20%] w-[300px] items-center justify-center">
+        <div className="mb-4">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="role"
+          >
+            Role
+          </label>
+          <input
+            className="border text-black border-[#BABFC4] min-w-[90%] h-[50px] p-3 text-[13px]"
+            id="role"
+            type="text"
+            placeholder="User or Owner"
+            name="role"
+            value={credentials.role}
+            onChange={onChange}
+            required
+          />
+        </div>
         <div className="mb-4">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
