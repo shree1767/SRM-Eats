@@ -3,8 +3,9 @@ import { useState} from "react";
 import { useLocation  } from "react-router-dom";
 import { Navbar } from "./Components/Navbar/Navbar";
 import { Footer } from "./Components/Footer/Footer";
-import AllRoutes from "./AllRoutes.jsx";
 import { CartProvider } from "./Components/ContextReducer";
+import AllRoutesUser from "./AllRoutesUser.jsx";
+import AllRoutesOwner from "./AllRoutesOwner";
 function App() {
   const [selectedValue, setSelectedValue] = useState();
   const handleChange = (e) => {
@@ -21,11 +22,11 @@ function App() {
             )
           }
           
-          <AllRoutes
+          <AllRoutesUser
             selectedValue={selectedValue}
             handleChange={handleChange}
           />
-          
+          <AllRoutesOwner/>
           {
             location.pathname !== "/Auth" && location.pathname !== "/signup"  &&(
               <Footer />

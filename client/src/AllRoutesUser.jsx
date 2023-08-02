@@ -8,7 +8,7 @@ import Auth from "./Pages/Auth/Auth";
 import SignUp from "./Pages/Auth/SignUp";
 import Cart from "./Pages/Cart/Cart";
 
-const AllRoutes = (props) => {
+const AllRoutesUser = (props) => {
   return (
     <>
       <Routes>
@@ -43,4 +43,4 @@ const AllRoutes = (props) => {
   );
 };
 
-export default AllRoutes;
+export default AllRoutesUser;
