@@ -11,7 +11,7 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="bg-gray-100 pt-[30vh] min-h-screen">
+    <div className="bg-gray-100 pt-[20vh] min-h-screen">
       <div className="container mx-auto px-4">
         <h1 className="text-3xl font-semibold text-gray-800 mb-6">Restaurant Dashboard</h1>
         {/* Orders section */}
