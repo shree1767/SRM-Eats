@@ -11,7 +11,7 @@ router.post(
   [
     body("email").isEmail(),
     body("name").isLength({ min: 5 }),
-    body("role").isLength({min:1}),
+    body("role").isLength({min:4}),
     body("password", "Incorrect Password").isLength({ min: 5 }),
   ],
   async (req, res) => {
