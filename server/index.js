@@ -9,26 +9,14 @@ mongoDB();
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
-app.use((req, res, next) => {
-  const allowedOrigins = ['http://localhost:3000', 'https://srm-eats.vercel.app'];
-  const origin = req.headers.origin;
-
-  if (allowedOrigins.includes(origin)) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-  }
+app.use( (req,res,next) =>{
+  res.setHeader("Access-Control-Allow-Origin","https://srm-eats.vercel.app");
   res.setHeader(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept'
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
   );
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.setHeader('Access-Control-Allow-Credentials', true);
-  if (req.method === 'OPTIONS') {
-    res.status(200).end();
-  } else {
-    next();
-  }
-});
-
+  next();
+})
 app.use(express.json())
 app.use('/api',require("./routes/loginsignup"))
 app.use('/api',require("./routes/DisplayData"))
