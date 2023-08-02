@@ -35,7 +35,6 @@ router.post(
     }
   }
 );
-
 router.post(
   "/loginuser",
   [
@@ -47,31 +46,52 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    
-    let email = req.body.email;
+
+    const { email } = req.body;
     try {
       let userData = await user.findOne({ email });
-      if (!userData)
-        return res
-          .status(404)
-          .json({ errors: "Try logging with correct credentials" });
-      const pwdCompare = await bcrypt.compare(req.body.password, userData.password);
-      if (!pwdCompare){
+      if (!userData) {
         return res
           .status(404)
           .json({ errors: "Try logging with correct credentials" });
       }
-      const data = {
-        user:{
-          id:userData.id,
-        }
+
+      const pwdCompare = await bcrypt.compare(
+        req.body.password,
+        userData.password
+      );
+
+      if (!pwdCompare) {
+        return res
+          .status(404)
+          .json({ errors: "Try logging with correct credentials" });
       }
-      const authToken = jwt.sign(data,jwtsecret);
-      return res.json({ success: true,authToken:authToken});
+
+      // If login is successful, determine the user's role and send the appropriate response.
+      if (userData.role === "user") {
+        const data = {
+          user: {
+            id: userData.id,
+          },
+        };
+        const authToken = jwt.sign(data, jwtsecret);
+        return res.json({ success: true, authToken: authToken, role: "user" });
+      } else if (userData.role === "owner") {
+        const data = {
+          user: {
+            id: userData.id,
+          },
+        };
+        const authToken = jwt.sign(data, jwtsecret);
+        return res.json({ success: true, authToken: authToken, role: "owner" });
+      } else {
+        return res.status(404).json({ errors: "Invalid role" });
+      }
     } catch (error) {
       console.log(error);
       res.json({ success: false });
     }
   }
 );
+
 module.exports = router;

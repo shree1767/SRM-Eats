@@ -4,28 +4,38 @@ import './Auth.module.css'
 const Auth = () => {
   const [credentials, setcredentials] = useState({email:"",password:""});
   let navigate = useNavigate();
-  const handleSubmit = async(e) =>{
-      e.preventDefault();
-      const response = await fetch("https://srm-eats-c2xl.vercel.app/api/loginuser",{
-        method: 'POST',
-        headers:{
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({email:credentials.email,password:credentials.password})
-      });
-      const json =  await response.json();
-      console.log(json);
-
-      if(!json.success){
-          alert("Enter valid credentials")
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await fetch("https://srm-eats-c2xl.vercel.app/api/loginuser", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: credentials.email,
+        password: credentials.password,
+      }),
+    });
+    const json = await response.json();
+    console.log(json);
+  
+    if (!json.success) {
+      alert("Enter valid credentials");
+    }
+  
+    if (json.success) {
+      localStorage.setItem("authToken", json.authToken);
+      console.log(localStorage.getItem("authToken"));
+  
+      // Check the user's role and navigate accordingly
+      if (json.role === "user") {
+        navigate("/home");
+      } else if (json.role === "owner") {
+        navigate("/ownerdashboard");
       }
-      if(json.success){
-          localStorage.setItem("authToken",json.authToken);
-          console.log(localStorage.getItem("authToken"))
-          navigate("/home");
-      }
-      
-  }
+    }
+  };
+  
 
   const onChange = (event) =>{
      setcredentials({...credentials,[event.target.name]:event.target.value})
