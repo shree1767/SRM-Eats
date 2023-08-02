@@ -88,7 +88,7 @@ let data = useCart()
               ) : (
                 " "
               )}
-              {localStorage.getItem("authToken") && localStorage.getItem("userRole")=="user"? (
+              {localStorage.getItem("authToken") ? (
                 <button
                   className="text-white justify-between text-sm block px-3 py-2 font-medium"
                   onClick={handleLogout}
