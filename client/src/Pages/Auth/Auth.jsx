@@ -27,11 +27,11 @@ const Auth = () => {
       localStorage.setItem("authToken", json.authToken);
       localStorage.setItem("userRole",json.role);
       console.log(localStorage.getItem("authToken"));
-  
+      
       // Check the user's role and navigate accordingly
-      if (json.role === "user") {
-        navigate("/home");
-      } else if (json.role === "owner") {
+      if (json.role === "User") {
+        navigate("/Home");
+      } else if (json.role === "Owner") {
         navigate("/ownerdashboard");
       }
     }
