@@ -51,9 +51,8 @@ router.post(
     try {
       let userData = await user.findOne({ email });
       if (!userData) {
-        return res
-          .status(404)
-          .json({ errors: "Try logging with correct credentials" });
+        // Use 401 status code for authentication failures
+        return res.status(401).json({ errors: "Invalid email or password" });
       }
 
       const pwdCompare = await bcrypt.compare(
@@ -62,9 +61,8 @@ router.post(
       );
 
       if (!pwdCompare) {
-        return res
-          .status(404)
-          .json({ errors: "Try logging with correct credentials" });
+        // Use 401 status code for authentication failures
+        return res.status(401).json({ errors: "Invalid email or password" });
       }
 
       // If login is successful, determine the user's role and send the appropriate response.
@@ -89,9 +87,10 @@ router.post(
       }
     } catch (error) {
       console.log(error);
-      res.json({ success: false });
+      res.status(500).json({ errors: "Server error" });
     }
   }
 );
+
 
 module.exports = router;
