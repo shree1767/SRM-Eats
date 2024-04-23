@@ -66,22 +66,22 @@ router.post(
       }
 
       // If login is successful, determine the user's role and send the appropriate response.
-      if (userData.role === "user") {
+      if (userData.role === "User") {
         const data = {
           user: {
             id: userData.id,
           },
         };
         const authToken = jwt.sign(data, jwtsecret);
-        return res.json({ success: true, authToken: authToken, role: "user" });
-      } else if (userData.role === "owner") {
+        return res.json({ success: true, authToken: authToken, role: "User" });
+      } else if (userData.role === "Owner") {
         const data = {
           user: {
             id: userData.id,
           },
         };
         const authToken = jwt.sign(data, jwtsecret);
-        return res.json({ success: true, authToken: authToken, role: "owner" });
+        return res.json({ success: true, authToken: authToken, role: "Owner" });
       } else {
         return res.status(404).json({ errors: "Invalid role" });
       }
